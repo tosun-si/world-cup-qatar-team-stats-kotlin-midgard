@@ -1,0 +1,12 @@
+.idea
+target
+*.iml
+**/avro/generated
+venv
+.envrc
+.DS_Store
+
+# Terraform
+**/.terraform/
+**/*.tfstate*
+**/tfplan.out
