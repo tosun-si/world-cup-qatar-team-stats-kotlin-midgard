@@ -2,10 +2,11 @@ package fr.groupbees.application
 
 import com.google.api.services.bigquery.model.TableRow
 import fr.groupbees.domain.*
-import fr.groupbees.domain_ptransform.JsonUtil
 import fr.groupbees.midgard.map
 import fr.groupbees.midgard.mapFn
 import fr.groupbees.midgard.mapFnWithContext
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import org.apache.beam.sdk.Pipeline
 import org.apache.beam.sdk.io.TextIO
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO
@@ -32,29 +33,30 @@ object WorldCupStatsApp {
         val pipeline: Pipeline = Pipeline.create(options)
 
         val fifaRankingSideInput: PCollectionView<List<TeamFifaRanking>> = pipeline
-            .apply("Read Fifa ranking side input", TextIO.read().from("gs://mazlum_dev/team_fifa_ranking.json"))
-            .map("Deserialize") { deserializeToTeamRanking(it) }
+            .apply("Read Fifa ranking side input", TextIO.read().from(options.inputFileTeamFifaRanking))
+            .map("Deserialize to Team Ranking") { deserializeToTeamRanking(it) }
             .apply("Create as collection view", View.asList());
 
         pipeline
             .apply("Read Json file", TextIO.read().from(options.inputJsonFile))
-            .map("Deserialize") { deserializeToPlayerStatsRaw(it) }
+            .map("Deserialize to Team Stats Raw") { deserializeToPlayerStatsRaw(it) }
             .map("Validate fields") { it.validateFields() }
-            .apply(WithKeys.of<String, TeamPlayerStatsRaw> { x -> x.nationality }
+            .apply("Add key on team Name", WithKeys.of<String, TeamPlayerStatsRaw> { x -> x.nationality }
                 .withKeyType(TypeDescriptors.strings()))
-            .apply(GroupByKey.create())
+            .apply("Group by Team Name", GroupByKey.create())
             .mapFn(
                 name = "Compute team player stats",
                 startBundleAction = { LOGGER.info("####################Start bundle compute stats") },
                 transform = { TeamPlayerStats.computeTeamPlayerStats(it.key, it.value) })
             .mapFnWithContext(
-                name = "DDD",
-                startBundleAction = { LOGGER.info("###################Start bundle add Fifa ranking") },
+                name = "Add team Fifa ranking",
+                setupAction = { LOGGER.info("####################Start add Fifa ranking") },
+                sideInputs = listOf(fifaRankingSideInput),
                 transform = { addFifaRankingToTeam(it, fifaRankingSideInput) }
             )
             .apply("Write To BigQuery", BigQueryIO.write<TeamPlayerStats>()
-                .withMethod(BigQueryIO.Write.Method.STORAGE_WRITE_API)
-                .to("${options.teamLeagueDataset}.${options.teamStatsTable}")
+                .withMethod(BigQueryIO.Write.Method.FILE_LOADS)
+                .to("${options.woldCupStatsDataset}.${options.woldCupTeamPlayerStatsTable}")
                 .withFormatFunction { toTeamPlayerStatsTableRow(it) }
                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_NEVER)
                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND))
@@ -74,11 +76,11 @@ object WorldCupStatsApp {
     }
 
     private fun deserializeToPlayerStatsRaw(playerStatsAsString: String): TeamPlayerStatsRaw {
-        return JsonUtil.deserialize(playerStatsAsString, TeamPlayerStatsRaw::class.java)
+        return Json.decodeFromString(playerStatsAsString)
     }
 
     private fun deserializeToTeamRanking(teamRankingAsString: String): TeamFifaRanking {
-        return JsonUtil.deserialize(teamRankingAsString, TeamFifaRanking::class.java)
+        return Json.decodeFromString(teamRankingAsString)
     }
 
     private fun toTeamPlayerStatsTableRow(teamPlayerStats: TeamPlayerStats): TableRow {
@@ -94,15 +96,15 @@ object WorldCupStatsApp {
 
         val topScorersRow = TableRow()
             .set("players", topScorers.players.map { toPlayerTableRow(it) })
-            .set("goals", topScorers.goals)
+            .set("goals", topScorers.goals.toIntOrNull())
 
         val bestPassersRow = TableRow()
             .set("players", bestPassers.players.map { toPlayerTableRow(it) })
-            .set("goalAssists", bestPassers.goalAssists)
+            .set("goalAssists", bestPassers.goalAssists.toIntOrNull())
 
         val bestDribblersRow = TableRow()
             .set("players", bestDribblers.players.map { toPlayerTableRow(it) })
-            .set("dribbles", bestDribblers.dribbles)
+            .set("dribbles", bestDribblers.dribbles.toFloatOrNull())
 
         val goalKeeperRow = TableRow()
             .set("playerName", goalKeeper.playerName)
@@ -112,19 +114,19 @@ object WorldCupStatsApp {
 
         val playersMostAppearancesRow = TableRow()
             .set("players", playersMostAppearances.players.map { toPlayerTableRow(it) })
-            .set("appearances", bestPassers.goalAssists)
+            .set("appearances", playersMostAppearances.appearances.toIntOrNull())
 
         val playersMostDuelsWonRow = TableRow()
             .set("players", playersMostDuelsWon.players.map { toPlayerTableRow(it) })
-            .set("duels", bestPassers.goalAssists)
+            .set("duels", playersMostDuelsWon.duels.toFloatOrNull())
 
         val playersMostInterceptionRow = TableRow()
             .set("players", playersMostInterception.players.map { toPlayerTableRow(it) })
-            .set("interceptions", playersMostInterception.interceptions)
+            .set("interceptions", playersMostInterception.interceptions.toFloatOrNull())
 
         val playersMostSuccessfulTacklesRow = TableRow()
             .set("players", playersMostSuccessfulTackles.players.map { toPlayerTableRow(it) })
-            .set("successfulTackles", playersMostSuccessfulTackles.successfulTackles)
+            .set("successfulTackles", playersMostSuccessfulTackles.successfulTackles.toFloatOrNull())
 
         return TableRow()
             .set("teamName", teamPlayerStats.teamName)
@@ -149,6 +151,6 @@ object WorldCupStatsApp {
             .set("position", player.position)
             .set("club", player.club)
             .set("brandSponsorAndUsed", player.brandSponsorAndUsed)
-            .set("appearances", player.appearances)
+            .set("appearances", player.appearances.toIntOrNull())
     }
 }

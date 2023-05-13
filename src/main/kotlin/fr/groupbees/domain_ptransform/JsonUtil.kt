@@ -15,7 +15,7 @@ object JsonUtil {
         return try {
             OBJECT_MAPPER.readValue(json, clazz)
         } catch (e: JsonProcessingException) {
-            throw IllegalStateException("Error Json deserialization")
+            throw IllegalStateException("Error Json deserialization", e)
         }
     }
 
@@ -40,7 +40,7 @@ object JsonUtil {
         return try {
             OBJECT_MAPPER.readValue(json, reference)
         } catch (e: JsonProcessingException) {
-            throw IllegalStateException("Error Json deserialization")
+            throw IllegalStateException("Error Json deserialization", e)
         }
     }
 
@@ -48,7 +48,7 @@ object JsonUtil {
         return try {
             OBJECT_MAPPER.readValue(json, reference)
         } catch (e: IOException) {
-            throw IllegalStateException("Error Json deserialization")
+            throw IllegalStateException("Error Json deserialization", e)
         }
     }
 
@@ -56,7 +56,7 @@ object JsonUtil {
         return try {
             OBJECT_MAPPER.readValue(stream, reference)
         } catch (e: IOException) {
-            throw IllegalStateException("Error Json deserialization")
+            throw IllegalStateException("Error Json deserialization", e)
         }
     }
 
@@ -64,7 +64,7 @@ object JsonUtil {
         return try {
             OBJECT_MAPPER.readValue(stream, reference)
         } catch (e: IOException) {
-            throw IllegalStateException("Error Json deserialization")
+            throw IllegalStateException("Error Json deserialization", e)
         }
     }
 
@@ -72,7 +72,7 @@ object JsonUtil {
         return try {
             OBJECT_MAPPER.writeValueAsString(obj)
         } catch (e: JsonProcessingException) {
-            throw IllegalStateException("Error Json serialization")
+            throw IllegalStateException("Error Json serialization", e)
         }
     }
 

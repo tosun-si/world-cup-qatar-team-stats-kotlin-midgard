@@ -7,12 +7,12 @@ interface WorldCupStatsOptions : PipelineOptions {
     @get:Description("Path of the input Json file to read from")
     var inputJsonFile: String
 
-    @get:Description("Path of the slogans file to read from")
-    var inputFileSlogans: String
+    @get:Description("Path of the Fifa ranking file to read from")
+    var inputFileTeamFifaRanking: String
 
-    @get:Description("Path of the file to write to")
-    var teamLeagueDataset: String
+    @get:Description("Output Dataset")
+    var woldCupStatsDataset: String
 
     @get:Description("Team stats table")
-    var teamStatsTable: String
+    var woldCupTeamPlayerStatsTable: String
 }

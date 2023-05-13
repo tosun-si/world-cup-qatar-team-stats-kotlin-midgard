@@ -1,0 +1,397 @@
+[
+  {
+    "name": "teamName",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "nationalTeamKitSponsor",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "fifaRanking",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "teamTotalGoals",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "playersMostSuccessfulTackles",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "successfulTackles",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "players",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "name": "appearances",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "brandSponsorAndUsed",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "club",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "position",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerDob",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "topScorers",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "goals",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "players",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "name": "appearances",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "brandSponsorAndUsed",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "club",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "position",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerDob",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "bestPassers",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "goalAssists",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "players",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "name": "appearances",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "brandSponsorAndUsed",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "club",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "position",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerDob",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "goalKeeper",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "cleanSheets",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "appearances",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "savePercentage",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "playerName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "name": "bestDribblers",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "dribbles",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "players",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "name": "appearances",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "brandSponsorAndUsed",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "club",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "position",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerDob",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "playersMostDuelsWon",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "duels",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "players",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "name": "appearances",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "brandSponsorAndUsed",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "club",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "position",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerDob",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "playersMostAppearances",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "appearances",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "players",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "name": "appearances",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "brandSponsorAndUsed",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "club",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "position",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerDob",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "playersMostInterception",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "interceptions",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "players",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "name": "appearances",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "brandSponsorAndUsed",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "club",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "position",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerDob",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "playerName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ingestionDate",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  }
+]
