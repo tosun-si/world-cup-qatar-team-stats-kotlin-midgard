@@ -12,10 +12,9 @@
     <packaging>jar</packaging>
 
     <properties>
-        <beam.version>2.46.0</beam.version>
+        <beam.version>2.47.0</beam.version>
 
-        <asgarde.version>0.23.0</asgarde.version>
-        <midgard.version>0.17.0</midgard.version>
+        <midgard.version>0.18.0-SNAPSHOT</midgard.version>
 
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
@@ -471,12 +470,6 @@
             <groupId>org.apache.beam</groupId>
             <artifactId>beam-sdks-java-io-google-cloud-platform</artifactId>
             <version>${beam.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>fr.groupbees</groupId>
-            <artifactId>asgarde</artifactId>
-            <version>${asgarde.version}</version>
         </dependency>
 
         <dependency>

@@ -2,6 +2,7 @@ package fr.groupbees.application
 
 import com.google.api.services.bigquery.model.TableRow
 import fr.groupbees.domain.*
+import fr.groupbees.midgard.filter
 import fr.groupbees.midgard.map
 import fr.groupbees.midgard.mapFn
 import fr.groupbees.midgard.mapFnWithContext
@@ -41,6 +42,8 @@ object WorldCupStatsApp {
             .apply("Read Json file", TextIO.read().from(options.inputJsonFile))
             .map("Deserialize to Team Stats Raw") { deserializeToPlayerStatsRaw(it) }
             .map("Validate fields") { it.validateFields() }
+            .filter("Filters Players with kit sponsor") { it.nationalTeamKitSponsor != "" }
+            .filter("Filters Players with position") { it.position != "" }
             .apply("Add key on team Name", WithKeys.of<String, TeamPlayerStatsRaw> { x -> x.nationality }
                 .withKeyType(TypeDescriptors.strings()))
             .apply("Group by Team Name", GroupByKey.create())

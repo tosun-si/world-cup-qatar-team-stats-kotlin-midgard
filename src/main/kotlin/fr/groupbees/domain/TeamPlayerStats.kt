@@ -37,6 +37,7 @@ data class TeamPlayerStats(
         ): TeamPlayerStats {
             val topScorersValue = teamPlayersStatsRaw
                 .filter { isInteger(it.goalsScored) }
+//                .filter { it.goalsScored != "0" }
                 .maxBy { it.goalsScored.toInt() }
                 .goalsScored
 
