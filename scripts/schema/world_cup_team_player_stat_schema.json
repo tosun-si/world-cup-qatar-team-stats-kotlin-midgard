@@ -190,6 +190,11 @@
         "name": "playerName",
         "type": "STRING",
         "mode": "NULLABLE"
+      },
+      {
+        "name": "club",
+        "type": "STRING",
+        "mode": "NULLABLE"
       }
     ]
   },

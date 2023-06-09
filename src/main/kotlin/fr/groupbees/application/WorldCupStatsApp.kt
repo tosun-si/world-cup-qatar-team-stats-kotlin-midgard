@@ -59,7 +59,7 @@ object WorldCupStatsApp {
             )
             .apply("Write To BigQuery", BigQueryIO.write<TeamPlayerStats>()
                 .withMethod(BigQueryIO.Write.Method.FILE_LOADS)
-                .to("${options.woldCupStatsDataset}.${options.woldCupTeamPlayerStatsTable}")
+                .to("${options.worldCupStatsDataset}.${options.worldCupTeamPlayerStatsTable}")
                 .withFormatFunction { toTeamPlayerStatsTableRow(it) }
                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_NEVER)
                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND))
@@ -98,37 +98,38 @@ object WorldCupStatsApp {
             teamPlayerStats.playersMostSuccessfulTackles
 
         val topScorersRow = TableRow()
-            .set("players", topScorers.players.map { toPlayerTableRow(it) })
+            .set("players", toPlayerTableRows(topScorers.players))
             .set("goals", topScorers.goals.toIntOrNull())
 
         val bestPassersRow = TableRow()
-            .set("players", bestPassers.players.map { toPlayerTableRow(it) })
+            .set("players", toPlayerTableRows(bestPassers.players))
             .set("goalAssists", bestPassers.goalAssists.toIntOrNull())
 
         val bestDribblersRow = TableRow()
-            .set("players", bestDribblers.players.map { toPlayerTableRow(it) })
+            .set("players", toPlayerTableRows(bestDribblers.players))
             .set("dribbles", bestDribblers.dribbles.toFloatOrNull())
 
         val goalKeeperRow = TableRow()
             .set("playerName", goalKeeper.playerName)
+            .set("club", goalKeeper.club)
             .set("appearances", goalKeeper.appearances)
             .set("savePercentage", goalKeeper.savePercentage)
             .set("cleanSheets", goalKeeper.cleanSheets)
 
         val playersMostAppearancesRow = TableRow()
-            .set("players", playersMostAppearances.players.map { toPlayerTableRow(it) })
+            .set("players", toPlayerTableRows(playersMostAppearances.players))
             .set("appearances", playersMostAppearances.appearances.toIntOrNull())
 
         val playersMostDuelsWonRow = TableRow()
-            .set("players", playersMostDuelsWon.players.map { toPlayerTableRow(it) })
+            .set("players", toPlayerTableRows(playersMostDuelsWon.players))
             .set("duels", playersMostDuelsWon.duels.toFloatOrNull())
 
         val playersMostInterceptionRow = TableRow()
-            .set("players", playersMostInterception.players.map { toPlayerTableRow(it) })
+            .set("players", toPlayerTableRows(playersMostInterception.players))
             .set("interceptions", playersMostInterception.interceptions.toFloatOrNull())
 
         val playersMostSuccessfulTacklesRow = TableRow()
-            .set("players", playersMostSuccessfulTackles.players.map { toPlayerTableRow(it) })
+            .set("players", toPlayerTableRows(playersMostSuccessfulTackles.players))
             .set("successfulTackles", playersMostSuccessfulTackles.successfulTackles.toFloatOrNull())
 
         return TableRow()
@@ -145,6 +146,10 @@ object WorldCupStatsApp {
             .set("playersMostInterception", playersMostInterceptionRow)
             .set("playersMostSuccessfulTackles", playersMostSuccessfulTacklesRow)
             .set("ingestionDate", Instant().toString())
+    }
+
+    private fun toPlayerTableRows(players: List<Player>): List<TableRow> {
+        return players.map { toPlayerTableRow(it) }
     }
 
     private fun toPlayerTableRow(player: Player): TableRow {

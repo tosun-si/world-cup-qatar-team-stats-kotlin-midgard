@@ -18,8 +18,8 @@ mvn compile exec:java \
   --serviceAccount=sa-dataflow-dev@gb-poc-373711.iam.gserviceaccount.com \
   --inputJsonFile=gs://mazlum_dev/world_cup_team_stats/input/world_cup_team_players_stats_raw_ndjson.json \
   --inputFileTeamFifaRanking=gs://mazlum_dev/world_cup_team_stats/input/team_fifa_ranking.json \
-  --woldCupStatsDataset=mazlum_test \
-  --woldCupTeamPlayerStatsTable=world_cup_team_players_stat \
+  --worldCupStatsDataset=mazlum_test \
+  --worldCupTeamPlayerStatsTable=world_cup_team_players_stat \
   " \
   -Pdataflow-runner
 ```

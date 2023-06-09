@@ -11,8 +11,8 @@ interface WorldCupStatsOptions : PipelineOptions {
     var inputFileTeamFifaRanking: String
 
     @get:Description("Output Dataset")
-    var woldCupStatsDataset: String
+    var worldCupStatsDataset: String
 
-    @get:Description("Team stats table")
-    var woldCupTeamPlayerStatsTable: String
+    @get:Description("Output table")
+    var worldCupTeamPlayerStatsTable: String
 }

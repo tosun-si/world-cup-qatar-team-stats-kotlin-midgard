@@ -37,12 +37,12 @@ data class TeamPlayerStats(
         ): TeamPlayerStats {
             val topScorersValue = teamPlayersStatsRaw
                 .filter { isInteger(it.goalsScored) }
-//                .filter { it.goalsScored != "0" }
                 .maxBy { it.goalsScored.toInt() }
                 .goalsScored
 
             val topScorers = teamPlayersStatsRaw
                 .filter { it.goalsScored == topScorersValue }
+                .filter { it.goalsScored != "0" }
                 .map { toPlayer(it) }
 
             val bestPassersValue = teamPlayersStatsRaw
@@ -52,6 +52,7 @@ data class TeamPlayerStats(
 
             val bestPassers = teamPlayersStatsRaw
                 .filter { it.assistsProvided == bestPassersValue }
+                .filter { it.assistsProvided != "0" }
                 .map { toPlayer(it) }
 
             val bestDribblersValue = teamPlayersStatsRaw
@@ -144,6 +145,7 @@ data class TeamPlayerStats(
 
             val goalKeeperStats = GoalkeeperStats(
                 playerName = currentGoalKeeperStats.playerName,
+                club = currentGoalKeeperStats.club,
                 appearances = currentGoalKeeperStats.appearances,
                 savePercentage = currentGoalKeeperStats.savePercentage,
                 cleanSheets = currentGoalKeeperStats.cleanSheets
