@@ -12,9 +12,9 @@
     <packaging>jar</packaging>
 
     <properties>
-        <beam.version>2.47.0</beam.version>
+        <beam.version>2.49.0</beam.version>
 
-        <midgard.version>0.18.0</midgard.version>
+        <midgard.version>0.20.0</midgard.version>
 
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
@@ -24,31 +24,33 @@
         <serialization.version>1.2.0</serialization.version>
         <java.version>1.8</java.version>
 
-        <bigquery.version>v2-rev20211129-1.32.1</bigquery.version>
-        <google-api-client.version>1.32.1</google-api-client.version>
-        <guava.version>31.0.1-jre</guava.version>
+        <bigquery.version>v2-rev20220924-2.0.0</bigquery.version>
+        <google-api-client.version>2.0.0</google-api-client.version>
+        <guava.version>31.1-jre</guava.version>
         <hamcrest.version>2.1</hamcrest.version>
-        <jackson.version>2.13.0</jackson.version>
+        <jackson.version>2.14.1</jackson.version>
         <joda.version>2.10.10</joda.version>
         <junit.version>4.13.1</junit.version>
-        <assertj.version>3.23.1</assertj.version>
-        <json-unit-assertj.version>2.35.0</json-unit-assertj.version>
-        <dagger.version>2.42</dagger.version>
-        <open-csv.version>5.6</open-csv.version>
-        <commons-io.version>2.11.0</commons-io.version>
-        <libraries-bom.version>24.4.0</libraries-bom.version>
+        <kafka.version>2.4.1</kafka.version>
+        <libraries-bom.version>26.14.0</libraries-bom.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-exec-plugin.version>1.6.0</maven-exec-plugin.version>
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
         <maven-shade-plugin.version>3.1.0</maven-shade-plugin.version>
         <mockito.version>3.7.7</mockito.version>
-        <pubsub.version>v1-rev20211130-1.32.1</pubsub.version>
+        <pubsub.version>v1-rev20220904-2.0.0</pubsub.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <spark.version>2.4.8</spark.version>
-        <hadoop.version>2.10.1</hadoop.version>
+        <spark.version>3.1.2</spark.version>
+        <hadoop.version>2.10.2</hadoop.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <nemo.version>0.1</nemo.version>
-        <flink.artifact.name>beam-runners-flink-1.14</flink.artifact.name>
+        <flink.artifact.name>beam-runners-flink-1.16</flink.artifact.name>
+
+        <assertj.version>3.23.1</assertj.version>
+        <json-unit-assertj.version>2.35.0</json-unit-assertj.version>
+        <dagger.version>2.42</dagger.version>
+        <open-csv.version>5.6</open-csv.version>
+        <commons-io.version>2.11.0</commons-io.version>
     </properties>
 
     <repositories>

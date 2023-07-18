@@ -19,7 +19,7 @@ mvn compile exec:java \
   --inputJsonFile=gs://mazlum_dev/world_cup_team_stats/input/world_cup_team_players_stats_raw_ndjson.json \
   --inputFileTeamFifaRanking=gs://mazlum_dev/world_cup_team_stats/input/team_fifa_ranking.json \
   --worldCupStatsDataset=mazlum_test \
-  --worldCupTeamPlayerStatsTable=world_cup_team_players_stat \
+  --worldCupTeamPlayerStatsTable=world_cup_team_players_stat_demo \
   " \
   -Pdataflow-runner
 ```
