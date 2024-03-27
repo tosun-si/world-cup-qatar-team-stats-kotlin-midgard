@@ -6,7 +6,6 @@ import fr.groupbees.midgard.filter
 import fr.groupbees.midgard.map
 import fr.groupbees.midgard.mapFn
 import fr.groupbees.midgard.mapFnWithContext
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.apache.beam.sdk.Pipeline
 import org.apache.beam.sdk.io.TextIO

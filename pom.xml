@@ -12,16 +12,16 @@
     <packaging>jar</packaging>
 
     <properties>
-        <beam.version>2.52.0</beam.version>
+        <beam.version>2.54.0</beam.version>
 
-        <midgard.version>0.23.0</midgard.version>
+        <midgard.version>0.25.0-SNAPSHOT</midgard.version>
 
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
-        <kotlin.version>1.7.0</kotlin.version>
-        <serialization.version>1.2.0</serialization.version>
+        <kotlin.version>1.9.22</kotlin.version>
+        <serialization.version>1.6.3</serialization.version>
         <java.version>1.8</java.version>
 
         <bigquery.version>v2-rev20230520-2.0.0</bigquery.version>
