@@ -14,7 +14,7 @@
     <properties>
         <beam.version>2.54.0</beam.version>
 
-        <midgard.version>0.25.0-SNAPSHOT</midgard.version>
+        <midgard.version>0.25.0</midgard.version>
 
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
